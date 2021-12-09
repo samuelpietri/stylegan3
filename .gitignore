@@ -1,0 +1,8 @@
+
+*.pyc
+
+results/00000-stylegan3-r-butterflies-gpus1-batch32-gamma0.5/
+
+*.pkl
+
+*.mp4
