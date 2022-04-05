@@ -1,4 +1,4 @@
-﻿# Copyright (c) 2021, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+# Copyright (c) 2021, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
 #
 # NVIDIA CORPORATION and its licensors retain all intellectual property
 # and proprietary rights in and to this software, related documentation
@@ -22,6 +22,10 @@ _plugin = None
 
 def _init():
     global _plugin
+    # Bob Burrough's PR (#45) so that the plugins work in Windows: https://github.com/NVlabs/stylegan3/pull/45
+    extras = {}
+    if os.name == 'nt':
+        extras['extra_cflags'] = ['/std:c++17']
     if _plugin is None:
         _plugin = custom_ops.get_plugin(
             module_name='filtered_lrelu_plugin',
@@ -29,6 +33,7 @@ def _init():
             headers=['filtered_lrelu.h', 'filtered_lrelu.cu'],
             source_dir=os.path.dirname(__file__),
             extra_cuda_cflags=['--use_fast_math'],
+            **extras,
         )
     return True
 
