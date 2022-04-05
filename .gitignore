@@ -2,7 +2,12 @@
 *.pyc
 
 results/00000-stylegan3-r-butterflies-gpus1-batch32-gamma0.5/
+training-runs/
+results/
+_screenshots/
 
 *.pkl
 
 *.mp4
+
+datasets/aldro_erbario.zip
