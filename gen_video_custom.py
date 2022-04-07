@@ -189,6 +189,7 @@ def generate_images(
         for j in range(0, num_seeds):
             randInt = random.randint(0, 2000)
             if(j%num_seeds_step == 0): randInt = j
+            if(j==num_seeds-1): randInt = 0
             custom_seed_list.append(randInt)
 
         # print(custom_seed_list)
