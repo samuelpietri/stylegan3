@@ -178,7 +178,7 @@ def generate_images(
 
    
    # Define a new name for video export
-    model_name = "aldrovandi_mix_02_256"
+    model_name = "aldrovandi_erbario_0432"
     
 
 
@@ -201,7 +201,7 @@ def generate_images(
 
         # print(seeds)
         print(multi_video_seeds)
-        video_name ="{model}_animation_{id:0>2d}_{truncation}.mp4".format(model = model_name, id = i, truncation = truncation_psi)
+        video_name =output+"{model}_animation_{id:0>2d}_{truncation}.mp4".format(model = model_name, id = i, truncation = truncation_psi)
         gen_interp_video(G=G, mp4=video_name, bitrate='12M', grid_dims=grid, num_keyframes=num_keyframes, w_frames=w_frames, seeds=multi_video_seeds, shuffle_seed=shuffle_seed, psi=truncation_psi)
 
 # #----------------------------------------------------------------------------
