@@ -10,4 +10,6 @@ _screenshots/
 
 *.mp4
 
-datasets/aldro_erbario.zip
+*.mov
+
+datasets/

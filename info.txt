@@ -1,18 +1,24 @@
-Prepare dataset
 
+-------------------------- DATASET ------------------------------
 python dataset_tool.py --source=/run/user/1000/gvfs/smb-share:server=rockstationfuse.local,share=fuse/Delivery/Catalogue/Falin\ Mynd/_PRODUCTION/datasets/helsinki/helsinki_cathedral_1024 
 --dest=/home/kobe/DL/gan/stylegan3-custom/datasets/countryside.zip helsinki_cathedral.zip
 
-Training. Rtx 3090
+
+-------------------------- TRAINING ------------------------------
+Training. Rtx 3090 -  STYLEGAN3
 python train.py --outdir=~/training-runs --cfg=stylegan3-r --data=~/datasets/metfacesu-1024x1024.zip \
     --gpus=1 --batch=32 --gamma=6.6 --mirror=1 --kimg=5000 --snap=2 \
     --resume=ffhqu1024
 
-    python train.py --outdir=~/training-runs --cfg=stylegan3-r --data=./datasets/helsinki_cathedral.zip \
-     --batch=32  --gpus=1 --batch-gpu=4 --gamma=0.5 --mirror=1 --kimg=5000 --snap=2   \
-     --resume=ffhqu1024 --aug=noaug --img-snap=1
+python train.py --outdir=~/training-runs --cfg=stylegan3-r --data=./datasets/helsinki_cathedral.zip \
+    --batch=32  --gpus=1 --batch-gpu=4 --gamma=0.5 --mirror=1 --kimg=5000 --snap=2   \
+    --resume=ffhqu1024 --aug=noaug --img-snap=1
 
-Training - Stylegan2 model
+python train.py --outdir=~/training-runs --cfg=stylegan3-r --data=d:/DL/stylegan3/repository/stylegan3/dataset/AB_test_003.zip \
+    --batch=32  --gpus=1 --batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=5000 --snap=2   \
+    --aug=noaug --img-snap=1 --metrics=none --dlr=0.004 --glr=0.0001 --resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00006-stylegan3-r-AB_test_003-gpus1-batch32-gamma6.6-no_resume/network-snapshot-000040.pkl
+
+Training - STYLEGAN 2
 python train.py --outdir=~/training-runs --cfg=stylegan2 \
 --data=./datasets/countryside.zip  --batch=32  --gpus=1 \
 --batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \     
@@ -22,3 +28,49 @@ python train.py --outdir=~/training-runs --cfg=stylegan2 \
 --data=./datasets/aldrovandi_illustrations_001.zip  --batch=32  --gpus=1 \
 --batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
 --resume=/home/kobe/DL/gan/stylegan3-custom/stylegan3-nvidia-models/stylegan2_1/stylegan2-ffhq-1024x1024.pkl --metrics=none
+
+ python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_SD_composition.zip  --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/pretrained/stylegan2-ffhq-1024x1024.pkl --metrics=none
+
+ python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_test_003.zip  --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00002-stylegan2-AB_test_002-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000568.pkl --metrics=none --aug=noaug --img-snap=1
+
+ python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_test_004_leaves_autumn.zip --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00009-stylegan2-AB_test_003-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000296.pkl --metrics=none --aug=noaug --img-snap=1
+
+ python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_test_005_autumn.zip --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00009-stylegan2-AB_test_003-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000296.pkl --metrics=none --aug=noaug --img-snap=1
+
+python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_test_flowers_mix.zip --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00014-stylegan2-AB_test_006_flowers-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000032.pkl --metrics=none --aug=noaug --img-snap=1
+
+python train.py --outdir=~/training-runs --cfg=stylegan2 \
+--data=./dataset/AB_test_autumn_mix.zip --batch=32  --gpus=1 \
+--batch-gpu=4 --gamma=6.6 --mirror=1 --kimg=10000 --snap=2 \
+--resume=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00013-stylegan2-AB_test_005_autumn-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000040.pkl --metrics=none --aug=noaug --img-snap=1
+
+
+-------------------------- GENERATION -----------------------------
+python gen_video.py --network=/d/DL/stylegan2/models/ada_models/00013-waves-res1024-11gb-gpu-ada-bgc-resumecustom/network-snapshot-000112.pkl \
+ --w-frames=480 --trunc=0.5 --output=waves_002_slow.mp4 --seeds=1000-1050
+
+
+
+python gen_video.py --network=d:/DL/stylegan3/repository/stylegan3/~/training-runs/00002-stylegan2-AB_test_002-gpus1-batch32-gamma6.6-resume_custom/network-snapshot-000576.pkl \
+ --w-frames=240 --trunc=0.8 --output=AB_SD_composition_001.mp4 --seeds=1000-1050
+
+ 
+python gen_video.py --network=//192.168.1.31/fuse/Delivery/Catalogue/Artificial\ Botany/_PRODUCTION/stylegan_models/Aldrovandi/stylegan2-ada/00003-stylegan2-aldrovandi_illustrations_001-gpus1-batch32-gamma6.6/network-snapshot-000496.pkl \
+--w-frames=210 --trunc=0.9 \
+--output=Aldro_Illustration_001.mov --seeds=1000-1119
+ 
