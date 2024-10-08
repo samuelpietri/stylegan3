@@ -6,6 +6,8 @@
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
+
+
 """Tool for creating ZIP/PNG based datasets."""
 
 import functools
@@ -409,7 +411,7 @@ def convert_dataset(
         "labels": [
             ["00000/img00000000.png",6],
             ["00000/img00000001.png",9],
-            ... repeated for every image in the dataset
+            ... repeated for every image in the datase
             ["00049/img00049999.png",1]
         ]
     }

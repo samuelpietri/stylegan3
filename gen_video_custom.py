@@ -106,7 +106,6 @@ def parse_range(s: Union[str, List[int]]) -> List[int]:
         else:
             ranges.append(int(p))
     return ranges
-
 #----------------------------------------------------------------------------
 
 def parse_tuple(s: Union[str, Tuple[int,int]]) -> Tuple[int, int]:
@@ -178,18 +177,15 @@ def generate_images(
 
    
    # Define a new name for video export
-    model_name = "aldrovandi_erbario_0432"
-    
-
-
+    model_name = "AB_UF_China_2_30_min"
 
     for i in range(1, num_video+1):
 
         custom_seed_list = []
         for j in range(0, num_seeds):
-            randInt = random.randint(0, 2000)
-            if(j%num_seeds_step == 0): randInt = j
-            if(j==num_seeds-1): randInt = 0
+            randInt = random.randint(0, 4000)
+            # if(j%num_seeds_step == 0): randInt = j
+            if(j==0 or j==num_seeds-1): randInt = i
             custom_seed_list.append(randInt)
 
         # print(custom_seed_list)
@@ -201,8 +197,8 @@ def generate_images(
 
         # print(seeds)
         print(multi_video_seeds)
-        video_name =output+"{model}_animation_{id:0>2d}_{truncation}.mp4".format(model = model_name, id = i, truncation = truncation_psi)
-        gen_interp_video(G=G, mp4=video_name, bitrate='12M', grid_dims=grid, num_keyframes=num_keyframes, w_frames=w_frames, seeds=multi_video_seeds, shuffle_seed=shuffle_seed, psi=truncation_psi)
+        video_name ="{model}_animation_{id:0>2d}_{truncation}.mp4".format(model = model_name, id = i, truncation = truncation_psi)
+        gen_interp_video(G=G, mp4=video_name, bitrate='72M', grid_dims=grid, num_keyframes=num_keyframes, w_frames=w_frames, seeds=multi_video_seeds, shuffle_seed=shuffle_seed, psi=truncation_psi)
 
 # #----------------------------------------------------------------------------
 
